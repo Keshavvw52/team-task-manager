@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
+from config import CORS_ORIGINS
 import models  # Import all models to register them
 from seed import seed_demo_data
 
@@ -20,10 +21,7 @@ app = FastAPI(
 # CORS - Allow frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://team-task-manager-blush-beta.vercel.app"
-    ],
+    allow_origins=CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
