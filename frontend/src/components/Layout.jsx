@@ -1,4 +1,4 @@
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import {
   House, LayoutDashboard, FolderKanban, CheckSquare, Users,
@@ -7,9 +7,11 @@ import {
 
 export default function Layout() {
   const { user, logout } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     logout()
+    navigate('/login', { replace: true })
   }
 
   const navItems = [
