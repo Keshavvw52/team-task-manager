@@ -2,12 +2,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 import models  # Import all models to register them
+from seed import seed_demo_data
 
 # Import routes
 from routes import auth, users, projects, tasks, dashboard
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
+seed_demo_data()
 
 app = FastAPI(
     title="Team Task Manager API",
@@ -19,9 +21,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-    "http://localhost:5173",
-    "https://your-frontend.vercel.app"
-],  # In production: set to your frontend URL
+        "http://localhost:5173",
+        "https://team-task-manager-blush-beta.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
